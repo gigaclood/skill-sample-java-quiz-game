@@ -1,9 +1,10 @@
-package com.amazon.ask.quiz.handlers;
+package it.gigaclood.alexa.quiz.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
-import com.amazon.ask.quiz.model.Constants;
+
+import it.gigaclood.alexa.quiz.model.Constants;
 
 import java.util.Optional;
 

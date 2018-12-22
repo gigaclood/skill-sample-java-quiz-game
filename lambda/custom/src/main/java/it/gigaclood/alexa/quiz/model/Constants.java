@@ -1,4 +1,4 @@
-package com.amazon.ask.quiz.model;
+package it.gigaclood.alexa.quiz.model;
 
 import java.util.Arrays;
 import java.util.List;

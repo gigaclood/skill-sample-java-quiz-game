@@ -1,4 +1,4 @@
-package com.amazon.ask.quiz.handlers;
+package it.gigaclood.alexa.quiz.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;

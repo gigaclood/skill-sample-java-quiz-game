@@ -1,18 +1,19 @@
-package com.amazon.ask.quiz.util;
+package it.gigaclood.alexa.quiz.util;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
-import com.amazon.ask.quiz.model.Attributes;
-import com.amazon.ask.quiz.model.StateProperty;
-import com.amazon.ask.quiz.model.State;
+
+import it.gigaclood.alexa.quiz.model.Attributes;
+import it.gigaclood.alexa.quiz.model.State;
+import it.gigaclood.alexa.quiz.model.StateProperty;
+
+import static it.gigaclood.alexa.quiz.model.Constants.START_QUIZ_MESSAGE;
+import static it.gigaclood.alexa.quiz.model.Constants.STATES;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-
-import static com.amazon.ask.quiz.model.Constants.START_QUIZ_MESSAGE;
-import static com.amazon.ask.quiz.model.Constants.STATES;
 
 public class QuestionUtils {
 

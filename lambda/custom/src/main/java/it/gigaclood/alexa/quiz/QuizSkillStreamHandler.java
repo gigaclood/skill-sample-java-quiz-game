@@ -1,15 +1,17 @@
-package com.amazon.ask.quiz;
+package it.gigaclood.alexa.quiz;
 
 import com.amazon.ask.Skills;
+
+import it.gigaclood.alexa.quiz.handlers.AnswerIntentHandler;
+import it.gigaclood.alexa.quiz.handlers.ExitSkillHandler;
+import it.gigaclood.alexa.quiz.handlers.HelpIntentHandler;
+import it.gigaclood.alexa.quiz.handlers.LaunchRequestHandler;
+import it.gigaclood.alexa.quiz.handlers.NoAnswerIntentHandler;
+import it.gigaclood.alexa.quiz.handlers.QuizAndStartOverIntentHandler;
+import it.gigaclood.alexa.quiz.handlers.RepeatIntentHandler;
+import it.gigaclood.alexa.quiz.handlers.SessionEndedHandler;
+
 import com.amazon.ask.SkillStreamHandler;
-import com.amazon.ask.quiz.handlers.ExitSkillHandler;
-import com.amazon.ask.quiz.handlers.HelpIntentHandler;
-import com.amazon.ask.quiz.handlers.LaunchRequestHandler;
-import com.amazon.ask.quiz.handlers.NoAnswerIntentHandler;
-import com.amazon.ask.quiz.handlers.AnswerIntentHandler;
-import com.amazon.ask.quiz.handlers.QuizAndStartOverIntentHandler;
-import com.amazon.ask.quiz.handlers.RepeatIntentHandler;
-import com.amazon.ask.quiz.handlers.SessionEndedHandler;
 
 public class QuizSkillStreamHandler extends SkillStreamHandler {
 

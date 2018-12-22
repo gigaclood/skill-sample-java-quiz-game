@@ -1,16 +1,17 @@
-package com.amazon.ask.quiz.handlers;
+package it.gigaclood.alexa.quiz.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
-import com.amazon.ask.quiz.model.Attributes;
-import com.amazon.ask.quiz.model.Constants;
-import com.amazon.ask.quiz.model.StateProperty;
-import com.amazon.ask.quiz.model.State;
-import com.amazon.ask.quiz.util.QuestionUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import it.gigaclood.alexa.quiz.model.Attributes;
+import it.gigaclood.alexa.quiz.model.Constants;
+import it.gigaclood.alexa.quiz.model.State;
+import it.gigaclood.alexa.quiz.model.StateProperty;
+import it.gigaclood.alexa.quiz.util.QuestionUtils;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
-import static com.amazon.ask.quiz.util.QuestionUtils.getPropertyOfState;
 import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.sessionAttribute;
+import static it.gigaclood.alexa.quiz.util.QuestionUtils.getPropertyOfState;
 
 public class AnswerIntentHandler implements RequestHandler {
 
