@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>quizserlvet</servlet-name>
-        <servlet-class>com.amazon.ask.helloworldservlet.HelloWorldSkillServlet</servlet-class>
+        <servlet-class>it.gigaclood.alexa.quiz.QuizSkillServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>quizserlvet</servlet-name>
