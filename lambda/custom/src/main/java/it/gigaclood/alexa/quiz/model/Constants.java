@@ -60,9 +60,9 @@ public class Constants {
 
     public static boolean USE_CARDS_FLAG = true;
 
-    public static String WELCOME_MESSAGE = "Welcome to the United States Quiz Game!  You can ask me about any of the fifty states and their capitals, or you can ask me to start a quiz.  What would you like to do?";
-
-    public static String START_QUIZ_MESSAGE = "OK.  I will ask you 10 questions about the United States.";
+    public static String WELCOME_MESSAGE = "Benvenuto al quiz sulle renne di Clood!";
+    
+    public static String START_QUIZ_MESSAGE = "OK. Ti farò 10 domande sulle renne! Dimmi semplicemente il numero della risposta che pensi sia corretta. Iniziamo!";
 
     // This is the message a user will hear when they try to cancel or stop the
     // skill, or when they finish a quiz.

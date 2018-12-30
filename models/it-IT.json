@@ -1,0 +1,69 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "Renna trivia",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AnswerIntent",
+          "samples": [
+            "La risposta è {Answer}",
+            "LA mia risposta è {Answer}",
+            "Penso sia {Answer}",
+            "{Answer} è la mia risposta",
+            "{Answer}"
+          ],
+          "slots": [
+            {
+              "name": "Answer",
+              "type": "AMAZON.NUMBER",
+              "samples": []
+            }
+          ]
+        },
+        {
+          "name": "DontKnowIntent",
+          "samples": [
+            "Non lo so",
+            "Non saprei",
+            "Non conosco la risposta",
+            "mi arrendo",
+            "salto",
+            "mai saputo",
+            "chi lo sa",
+            "troppo difficile"
+          ],
+          "slots": []
+        },
+        {
+          "name": "AMAZON.StartOverIntent",
+          "samples": [
+            "Iniziamo",
+            "Nuovo Gioco",
+            "Via!"
+          ]
+        },
+        {
+          "name": "AMAZON.RepeatIntent"
+        },
+        {
+          "name": "AMAZON.YesIntent"
+        },
+        {
+          "name": "AMAZON.NoIntent"
+        }
+      ]
+    }
+  }
+}

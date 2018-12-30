@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>quizserlvet</h2>
-Skill Alexa. L'endpoint reale è sul contesto /quizserlvet/main
+<h2>quizservlet</h2>
+Skill Alexa. L'endpoint reale è sul contesto /quizservlet/main
 </body>
 </html>

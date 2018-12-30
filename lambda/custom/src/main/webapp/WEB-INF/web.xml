@@ -3,14 +3,14 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>quizserlvet</display-name>
+	<display-name>quizservlet</display-name>
 
     <servlet>
-        <servlet-name>quizserlvet</servlet-name>
+        <servlet-name>quizservlet</servlet-name>
         <servlet-class>it.gigaclood.alexa.quiz.QuizSkillServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>quizserlvet</servlet-name>
+        <servlet-name>quizservlet</servlet-name>
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 

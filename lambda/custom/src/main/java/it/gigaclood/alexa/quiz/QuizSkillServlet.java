@@ -24,7 +24,6 @@ import it.gigaclood.alexa.quiz.handlers.ExitSkillHandler;
 import it.gigaclood.alexa.quiz.handlers.HelpIntentHandler;
 import it.gigaclood.alexa.quiz.handlers.LaunchRequestHandler;
 import it.gigaclood.alexa.quiz.handlers.NoAnswerIntentHandler;
-import it.gigaclood.alexa.quiz.handlers.QuizAndStartOverIntentHandler;
 import it.gigaclood.alexa.quiz.handlers.RepeatIntentHandler;
 import it.gigaclood.alexa.quiz.handlers.SessionEndedHandler;
 
@@ -46,7 +45,7 @@ public class QuizSkillServlet extends SkillServlet {
 		return Skills.standard()
 				.addRequestHandlers(
 						new LaunchRequestHandler(), 
-						new QuizAndStartOverIntentHandler(),
+//						new QuizAndStartOverIntentHandler(),
 						new NoAnswerIntentHandler(), 
 						new AnswerIntentHandler(), 
 						new RepeatIntentHandler(),
@@ -54,7 +53,7 @@ public class QuizSkillServlet extends SkillServlet {
 						new ExitSkillHandler(), 
 						new SessionEndedHandler())
 				// Add your skill id below
-				.withSkillId("amzn1.ask.skill.a2579df0-30da-49c6-a9cb-095b818e724a").build();
+				.withSkillId("amzn1.ask.skill.a52e74de-c28a-440f-b37e-ea77be4c407b").build();
 	}
 
 }
