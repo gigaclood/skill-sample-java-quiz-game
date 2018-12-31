@@ -8,7 +8,6 @@ import it.gigaclood.alexa.quiz.model.Attributes;
 import it.gigaclood.alexa.quiz.model.State;
 import it.gigaclood.alexa.quiz.model.StateProperty;
 
-import static it.gigaclood.alexa.quiz.model.Constants.START_QUIZ_MESSAGE;
 import static it.gigaclood.alexa.quiz.model.Constants.STATES;
 
 import java.util.Map;
@@ -25,7 +24,7 @@ public class QuestionUtils {
         int counter = (int)sessionAttributes.get(Attributes.COUNTER_KEY);
 
         if (counter == 0) {
-            sessionAttributes.put(Attributes.RESPONSE_KEY, START_QUIZ_MESSAGE + " ");
+            sessionAttributes.put(Attributes.RESPONSE_KEY, " ");
         }
 
         counter++;

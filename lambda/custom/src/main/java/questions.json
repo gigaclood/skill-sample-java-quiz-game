@@ -1,0 +1,29 @@
+{
+  "questions": [
+    {
+      "question": "Le renne hanno un manto molto spesso, quanti peli per pollice quadrato hanno?",
+      "correct": 1,
+      "answers": [
+        "13,000",
+        "1,200",
+        "5,000",
+        "700",
+        "1,000",
+        "120,000"
+      ]
+    },
+    {
+      "question":"Rudolph la renna dal naso rosso, il film del 1964 è stato girato in? ",
+      "correct": 1,
+      "answers": [
+        "Japan",
+        "United States",
+        "Finland",
+        "Germany",
+        "Canada",
+        "Norway",
+        "France"
+      ]
+    }
+  ]
+}

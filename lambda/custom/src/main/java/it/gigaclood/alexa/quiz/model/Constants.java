@@ -60,9 +60,11 @@ public class Constants {
 
     public static boolean USE_CARDS_FLAG = true;
 
-    public static String WELCOME_MESSAGE = "Benvenuto al quiz sulle renne di Clood!";
+    public static String NEW_GAME_MESSAGE = "Benvenuto al quiz sulle renne di Clood! ";
     
-    public static String START_QUIZ_MESSAGE = "OK. Ti farò 10 domande sulle renne! Dimmi semplicemente il numero della risposta che pensi sia corretta. Iniziamo!";
+    public static String WELCOME_MESSAGE = "Ti farò 10 domande sulle renne! Dimmi semplicemente il numero della risposta che pensi sia corretta. Iniziamo!";
+    
+    public static String TELL_QUESTION_MESSAGE= "Domanda numero ";
 
     // This is the message a user will hear when they try to cancel or stop the
     // skill, or when they finish a quiz.
@@ -83,4 +85,25 @@ public class Constants {
     public static List<String> INCORRECT_RESPONSES = Arrays.asList("Argh", "Aw man", "Blarg", "Blast", "Boo", "Bummer", "Darn", "D'oh", "Dun dun dun", "Eek", "Honk", "Le sigh",
             "Mamma mia", "Oh boy", "Oh dear", "Oof", "Ouch", "Ruh roh", "Shucks", "Uh oh", "Wah wah", "Whoops a daisy", "Yikes");
 
+    
+//    
+//        GAME_NAME: 'Reindeer Trivia',
+//        HELP_MESSAGE: 'I will ask you %s multiple choice questions. Respond with the number of the answer. For example, say one, two, three, or four. To start a new game at any time, say, start game. ',
+//        REPEAT_QUESTION_MESSAGE: 'To repeat the last question, say, repeat. ',
+//        ASK_MESSAGE_START: 'Would you like to start playing?',
+//        HELP_REPROMPT: 'To give an answer to a question, respond with the number of the answer. ',
+//        STOP_MESSAGE: 'Would you like to keep playing?',
+//        CANCEL_MESSAGE: 'Ok, let\'s play again soon.',
+//        NO_MESSAGE: 'Ok, we\'ll play another time. Goodbye!',
+//        TRIVIA_UNHANDLED: 'Try saying a number between 1 and %s',
+//        HELP_UNHANDLED: 'Say yes to continue, or no to end the game.',
+//        START_UNHANDLED: 'Say start to start a new game.',
+//        ANSWER_CORRECT_MESSAGE: 'correct. ',
+//        ANSWER_WRONG_MESSAGE: 'wrong. ',
+//        CORRECT_ANSWER_MESSAGE: 'The correct answer is %s: %s. ',
+//        ANSWER_IS_MESSAGE: 'That answer is ',
+//        TELL_QUESTION_MESSAGE: 'Question %s. %s ',
+//        GAME_OVER_MESSAGE: 'You got %s out of %s questions correct. Thank you for playing!',
+//        SCORE_IS_MESSAGE: 'Your score is %s. '
+    
 }

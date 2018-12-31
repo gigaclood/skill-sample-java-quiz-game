@@ -2,6 +2,10 @@ package it.gigaclood.alexa.quiz.model;
 
 public final class Attributes {
 
+	public static final String GAME_QUESTIONS = "gamequestions";
+	public static final String CURRENT_QUESTION = "currentquestion";
+	public static final String CURRENT_QUESTION_INDEX = "currentquestionindex";
+	
     public static final String STATE_KEY = "state";
     public static final String QUIZ_ITEM_KEY = "quizitem";
     public static final String QUIZ_SCORE_KEY = "quizscore";
@@ -11,5 +15,6 @@ public final class Attributes {
 
     public static final String START_STATE = "_START";
     public static final String QUIZ_STATE = "_QUIZ";
+	
 
 }

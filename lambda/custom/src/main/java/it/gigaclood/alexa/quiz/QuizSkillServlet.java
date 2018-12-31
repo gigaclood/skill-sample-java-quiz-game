@@ -13,8 +13,6 @@
 
 package it.gigaclood.alexa.quiz;
 
-import java.util.logging.Logger;
-
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.amazon.ask.servlet.SkillServlet;
@@ -40,8 +38,8 @@ public class QuizSkillServlet extends SkillServlet {
 
 	@SuppressWarnings("unchecked")
 	private static Skill getSkill() {
-		Logger log = Logger.getLogger("CSS");
-		log.info("getSkill");
+	//	Logger log = Logger.getLogger("CSS");
+	//	log.info("getSkill");
 		return Skills.standard()
 				.addRequestHandlers(
 						new LaunchRequestHandler(), 

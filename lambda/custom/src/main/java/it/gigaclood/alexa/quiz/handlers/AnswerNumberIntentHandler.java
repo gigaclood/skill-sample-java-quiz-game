@@ -73,39 +73,39 @@ public class AnswerNumberIntentHandler implements RequestHandler {
                     .build();
         }
         
-        
-        const { requestEnvelope, attributesManager, responseBuilder } = handlerInput;
-        const { intent } = requestEnvelope.request;
-
-        const answerSlotValid = isAnswerSlotValid(intent);
-
-        let speechOutput = '';
-        let speechOutputAnalysis = '';
-
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const gameQuestions = sessionAttributes.questions;
-        let correctAnswerIndex = parseInt(sessionAttributes.correctAnswerIndex, 10);
-        let currentScore = parseInt(sessionAttributes.score, 10);
-        let currentQuestionIndex = parseInt(sessionAttributes.currentQuestionIndex, 10);
-        const { correctAnswerText } = sessionAttributes;
-        const requestAttributes = attributesManager.getRequestAttributes();
-        const translatedQuestions = requestAttributes.t('QUESTIONS');
-
-
-        if (answerSlotValid
-          && parseInt(intent.slots.Answer.value, 10) === sessionAttributes.correctAnswerIndex) {
-          currentScore += 1;
-          speechOutputAnalysis = requestAttributes.t('ANSWER_CORRECT_MESSAGE');
-        } else {
-          if (!userGaveUp) {
-            speechOutputAnalysis = requestAttributes.t('ANSWER_WRONG_MESSAGE');
-          }
-
-          speechOutputAnalysis += requestAttributes.t(
-            'CORRECT_ANSWER_MESSAGE',
-            correctAnswerIndex,
-            correctAnswerText
-          );
+//        
+//        const { requestEnvelope, attributesManager, responseBuilder } = handlerInput;
+//        const { intent } = requestEnvelope.request;
+//
+//        const answerSlotValid = isAnswerSlotValid(intent);
+//
+//        let speechOutput = '';
+//        let speechOutputAnalysis = '';
+//
+//        const sessionAttributes = attributesManager.getSessionAttributes();
+//        const gameQuestions = sessionAttributes.questions;
+//        let correctAnswerIndex = parseInt(sessionAttributes.correctAnswerIndex, 10);
+//        let currentScore = parseInt(sessionAttributes.score, 10);
+//        let currentQuestionIndex = parseInt(sessionAttributes.currentQuestionIndex, 10);
+//        const { correctAnswerText } = sessionAttributes;
+//        const requestAttributes = attributesManager.getRequestAttributes();
+//        const translatedQuestions = requestAttributes.t('QUESTIONS');
+//
+//
+//        if (answerSlotValid
+//          && parseInt(intent.slots.Answer.value, 10) === sessionAttributes.correctAnswerIndex) {
+//          currentScore += 1;
+//          speechOutputAnalysis = requestAttributes.t('ANSWER_CORRECT_MESSAGE');
+//        } else {
+//          if (!userGaveUp) {
+//            speechOutputAnalysis = requestAttributes.t('ANSWER_WRONG_MESSAGE');
+//          }
+//
+//          speechOutputAnalysis += requestAttributes.t(
+//            'CORRECT_ANSWER_MESSAGE',
+//            correctAnswerIndex,
+//            correctAnswerText
+//          );
     }
 
     private String getAnswerText(StateProperty stateProperty, State state) {
