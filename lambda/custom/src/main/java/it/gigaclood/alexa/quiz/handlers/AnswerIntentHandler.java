@@ -5,10 +5,12 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
+import com.amazonaws.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.gigaclood.alexa.quiz.model.Attributes;
 import it.gigaclood.alexa.quiz.model.Constants;
+import it.gigaclood.alexa.quiz.model.QuestionDto;
 import it.gigaclood.alexa.quiz.model.State;
 import it.gigaclood.alexa.quiz.model.StateProperty;
 import it.gigaclood.alexa.quiz.util.QuestionUtils;
@@ -38,70 +40,85 @@ public class AnswerIntentHandler implements RequestHandler {
         Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
 
         String responseText;
-        String speechOutput;
+        String speechOutputAnalysis;
 
-        Map<String, String> quizItem = (LinkedHashMap<String, String>)sessionAttributes.get(Attributes.QUIZ_ITEM_KEY);
-        State state = MAPPER.convertValue(quizItem, State.class);
+        List<QuestionDto> gameQuestions = (List<QuestionDto>) sessionAttributes.get(Attributes.GAME_QUESTIONS);
+        Map questonDtoMap = (Map)sessionAttributes.get(Attributes.CURRENT_QUESTION);
+		QuestionDto currentQuestion = new ObjectMapper().convertValue(questonDtoMap, QuestionDto.class);
+		Integer currentQuestionIndex = (Integer)sessionAttributes.get(Attributes.CURRENT_QUESTION_INDEX);
+        
+		int answerIndex = isAnswerSlotValid(input);
 
-        StateProperty stateProperty = StateProperty.valueOf((String) sessionAttributes.get(Attributes.QUIZ_PROPERTY_KEY));
-        int counter = (int) sessionAttributes.get(Attributes.COUNTER_KEY);
+		if (answerIndex>0 && answerIndex == currentQuestion.getCorrect()+1)
+		{
+//		    currentScore += 1;
+			speechOutputAnalysis = Constants.ANSWER_CORRECT_MESSAGE;
+		} else {
+		    if (!false) {
+		      speechOutputAnalysis = Constants.ANSWER_WRONG_MESSAGE;
+		    }
+
+		    speechOutputAnalysis +=  Constants.CORRECT_ANSWER_MESSAGE+currentQuestion.getCorrect()+". "+
+		    	currentQuestion.getAnswers().get(currentQuestion.getCorrect()-1);
+		}
+		int counter = (int) sessionAttributes.get(Attributes.COUNTER_KEY);
         int quizScore = (int) sessionAttributes.get(Attributes.QUIZ_SCORE_KEY);
 
-        IntentRequest intentRequest = (IntentRequest) input.getRequestEnvelope().getRequest();
-        boolean correct = compareSlots(intentRequest.getIntent().getSlots(), getPropertyOfState(stateProperty, state));
-
-        if (correct) {
-            quizScore++;
-            responseText = getSpeechCon(true);
-            sessionAttributes.put(Attributes.QUIZ_SCORE_KEY, quizScore);
-        } else {
-            responseText = getSpeechCon(false);
-        }
-
-        responseText += getAnswerText(stateProperty, state);
-
-        if (counter < 10) {
-            responseText += "Your current score is " + quizScore + " out of " + counter + ". ";
-            sessionAttributes.put(Attributes.RESPONSE_KEY, responseText);
-            return QuestionUtils.generateQuestion(input);
-        } else {
-            responseText += "Your final score is " + quizScore + " out of " + counter + ". ";
-            speechOutput = responseText + " " + Constants.EXIT_SKILL_MESSAGE;
+        if (currentQuestionIndex == 1) {
+            String speechOutput = Constants.ANSWER_IS_MESSAGE;
+            speechOutput += speechOutputAnalysis + " Hai finito!";
             return input.getResponseBuilder()
                     .withSpeech(speechOutput)
                     .withShouldEndSession(true)
                     .build();
+          }
+        else {
+        	currentQuestionIndex++;
+
+    		StringBuilder speechQuestion = new StringBuilder(Constants.TELL_QUESTION_MESSAGE);
+    		speechQuestion.append(currentQuestionIndex + 1).append(" ");
+    		speechQuestion.append(gameQuestions.get(currentQuestionIndex).getQuestion());
+
+    		int i = 1;
+    		List<String> answers = gameQuestions.get(currentQuestionIndex).getAnswers();
+    		for (String answer : answers) {
+    			speechQuestion.append(i).append(". ").append(answer).append(". ");
+    			i++;
+    		}
+
+    		String speechOutput = Constants.ANSWER_IS_MESSAGE;
+            speechOutput += speechOutputAnalysis + " . "+speechQuestion;
+            		
+    		if (sessionAttributes != null) {
+    			sessionAttributes.put(Attributes.CURRENT_QUESTION, gameQuestions.get(currentQuestionIndex));
+    			sessionAttributes.put(Attributes.CURRENT_QUESTION_INDEX, currentQuestionIndex);
+    		}
+    		return input.getResponseBuilder()
+                    .withSpeech(speechOutput)
+                    .withShouldEndSession(false)
+                    .build();
+        	
         }
+
     }
 
-    private String getAnswerText(StateProperty stateProperty, State state) {
-        switch(stateProperty) {
-            case ABBREVIATION:
-                return "The " + stateProperty.getValue() + " of " + state.getName() + " is <say-as interpret-as='spell-out'>" + getPropertyOfState(stateProperty, state) + "</say-as>. ";
-            default:
-                return "The " + stateProperty.getValue() + " of " + state.getName() + " is " + getPropertyOfState(stateProperty, state) + ". ";
-        }
+    private int isAnswerSlotValid(HandlerInput input) {
+        IntentRequest intentRequest = (IntentRequest) input.getRequestEnvelope().getRequest();
+        if (
+        		intentRequest!=null &&
+        		intentRequest.getIntent()!=null &&
+        		intentRequest.getIntent().getSlots()!=null &&
+        		intentRequest.getIntent().getSlots().get("Answer") !=null &&
+        		intentRequest.getIntent().getSlots().get("Answer").getValue()!=null
+        	)
+        {
+        	int answerInt = Integer.parseInt(intentRequest.getIntent().getSlots().get("Answer").getValue());
+        		
+        	if(answerInt>0 && answerInt<7)
+        		return answerInt;
+        	
+    	}   
+    	return -1;
     }
-
-    private String getSpeechCon(boolean correct) {
-        if (correct) {
-            return "<say-as interpret-as='interjection'>" + getRandomItem(Constants.CORRECT_RESPONSES) + "! </say-as><break strength='strong'/>";
-        } else {
-            return "<say-as interpret-as='interjection'>" + getRandomItem(Constants.INCORRECT_RESPONSES) + " </say-as><break strength='strong'/>";
-        }
-    }
-
-    private <T> T getRandomItem(List<T> list) {
-        return list.get(RANDOM.nextInt(list.size()));
-    }
-
-    private boolean compareSlots(Map<String, Slot> slots, String correctAnswer) {
-        for (Slot slot : slots.values()) {
-            if (slot.getValue() != null && slot.getValue().toLowerCase().equals(correctAnswer.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    	
 }

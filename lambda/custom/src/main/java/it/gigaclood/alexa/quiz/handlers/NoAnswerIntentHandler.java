@@ -1,21 +1,19 @@
 package it.gigaclood.alexa.quiz.handlers;
 
-import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Response;
-import com.amazon.ask.model.ui.Image;
-
-import it.gigaclood.alexa.quiz.model.Attributes;
-import it.gigaclood.alexa.quiz.model.Constants;
-import it.gigaclood.alexa.quiz.model.State;
+import static com.amazon.ask.request.Predicates.intentName;
+import static com.amazon.ask.request.Predicates.sessionAttribute;
 
 import java.util.Map;
 import java.util.Optional;
 
-import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.sessionAttribute;
-import static it.gigaclood.alexa.quiz.util.QuestionUtils.getState;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.IntentRequest;
+import com.amazon.ask.model.Response;
+
+import it.gigaclood.alexa.quiz.model.Attributes;
+import it.gigaclood.alexa.quiz.model.Constants;
+import it.gigaclood.alexa.quiz.model.State;
 
 public class NoAnswerIntentHandler implements RequestHandler {
 
@@ -30,36 +28,14 @@ public class NoAnswerIntentHandler implements RequestHandler {
         sessionAttributes.put(Attributes.STATE_KEY, Attributes.START_STATE);
 
         IntentRequest intentRequest = (IntentRequest) input.getRequestEnvelope().getRequest();
-        Optional<State> state = getState(intentRequest.getIntent().getSlots());
-
-        if (state.isPresent()) {
-            if (Constants.USE_CARDS_FLAG) {
-                Image image = Image.builder()
-                        .withSmallImageUrl(getSmallImage(state.get()))
-                        .withSmallImageUrl(getLargeImage(state.get()))
-                        .build();
-                return input.getResponseBuilder()
-                        .withSpeech(getSpeechDescription(state.get()))
-                        .withReprompt(Constants.REPROMPT_MESSAGE)
-                        .withStandardCard(state.get().getName(), getTextDescription(state.get()), image)
-                        .withShouldEndSession(false)
-                        .build();
-
-            } else {
-                return input.getResponseBuilder()
-                        .withSpeech(getSpeechDescription(state.get()))
-                        .withReprompt(Constants.REPROMPT_MESSAGE)
-                        .withShouldEndSession(false)
-                        .build();
-            }
-        } else {
+       
             String unknownAnswerText = "I'm sorry. That is not something I know very much about in this skill. " + Constants.HELP_MESSAGE;
             return input.getResponseBuilder()
                     .withSpeech(unknownAnswerText)
                     .withReprompt(unknownAnswerText)
                     .withShouldEndSession(false)
                     .build();
-        }
+
     }
 
     private String getTextDescription(State state) {
