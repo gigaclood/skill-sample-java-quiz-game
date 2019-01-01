@@ -40,8 +40,9 @@ public class AnswerIntentHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
         Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
 
+        boolean userGiveUp = input.matches(intentName("DontKnowIntent"));
         String responseText;
-        String speechOutputAnalysis;
+        String speechOutputAnalysis = "";
 
         List<Map> gameQuestionsMap = (List<Map>) sessionAttributes.get(Attributes.GAME_QUESTIONS);
         List<QuestionDto> gameQuestions = new ObjectMapper().convertValue(gameQuestionsMap,new TypeReference<List<QuestionDto>>(){});
@@ -57,7 +58,7 @@ public class AnswerIntentHandler implements RequestHandler {
 //		    currentScore += 1;
 			speechOutputAnalysis = Constants.ANSWER_CORRECT_MESSAGE;
 		} else {
-		    if (!false) {
+		    if (!userGiveUp) {
 		      speechOutputAnalysis = Constants.ANSWER_WRONG_MESSAGE;
 		    }
 
@@ -68,7 +69,7 @@ public class AnswerIntentHandler implements RequestHandler {
         int quizScore = (int) sessionAttributes.get(Attributes.QUIZ_SCORE_KEY);
 
         if (currentQuestionIndex == 1) {
-            String speechOutput = Constants.ANSWER_IS_MESSAGE;
+            String speechOutput = userGiveUp? "":Constants.ANSWER_IS_MESSAGE;
             speechOutput += speechOutputAnalysis + " Hai finito!";
             return input.getResponseBuilder()
                     .withSpeech(speechOutput)
@@ -89,7 +90,7 @@ public class AnswerIntentHandler implements RequestHandler {
     			i++;
     		}
 
-    		String speechOutput = Constants.ANSWER_IS_MESSAGE;
+    		String speechOutput = userGiveUp? "":Constants.ANSWER_IS_MESSAGE;
             speechOutput += speechOutputAnalysis + " . "+speechQuestion;
             		
     		if (sessionAttributes != null) {
