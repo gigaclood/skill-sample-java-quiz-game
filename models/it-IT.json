@@ -19,7 +19,7 @@
           "name": "AnswerIntent",
           "samples": [
             "La risposta è {Answer}",
-            "LA mia risposta è {Answer}",
+            "La mia risposta è {Answer}",
             "Penso sia {Answer}",
             "{Answer} è la mia risposta",
             "{Answer}"

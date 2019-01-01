@@ -30,7 +30,6 @@ public class LaunchRequestHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
-		sessionAttributes.put(Attributes.STATE_KEY, Attributes.QUIZ_STATE);
 		sessionAttributes.put(Attributes.RESPONSE_KEY, "");
 		sessionAttributes.put(Attributes.COUNTER_KEY, 0);
 		sessionAttributes.put(Attributes.QUIZ_SCORE_KEY, 0);

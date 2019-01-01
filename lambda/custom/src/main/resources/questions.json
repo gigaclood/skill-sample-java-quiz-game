@@ -12,6 +12,19 @@
         "120,000"
       ]
     },
+     {
+      "question":"LA risposta giusta è 30? ",
+      "correct": 3,
+      "answers": [
+        "10",
+        "20",
+        "30",
+        "40",
+        "50",
+        "60",
+        "70"
+      ]
+    },
     {
       "question":"Rudolph la renna dal naso rosso, il film del 1964 è stato girato in? ",
       "correct": 1,

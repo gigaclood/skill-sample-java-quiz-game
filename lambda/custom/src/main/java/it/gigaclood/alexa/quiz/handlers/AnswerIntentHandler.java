@@ -6,6 +6,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazonaws.util.StringUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.gigaclood.alexa.quiz.model.Attributes;
@@ -32,7 +33,7 @@ public class AnswerIntentHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AnswerIntent").and(sessionAttribute(Attributes.STATE_KEY, Attributes.QUIZ_STATE)));
+        return (input.matches(intentName("AnswerIntent")) || input.matches(intentName("DontKnowIntent")));
     }
 
     @Override
@@ -42,14 +43,16 @@ public class AnswerIntentHandler implements RequestHandler {
         String responseText;
         String speechOutputAnalysis;
 
-        List<QuestionDto> gameQuestions = (List<QuestionDto>) sessionAttributes.get(Attributes.GAME_QUESTIONS);
+        List<Map> gameQuestionsMap = (List<Map>) sessionAttributes.get(Attributes.GAME_QUESTIONS);
+        List<QuestionDto> gameQuestions = new ObjectMapper().convertValue(gameQuestionsMap,new TypeReference<List<QuestionDto>>(){});
         Map questonDtoMap = (Map)sessionAttributes.get(Attributes.CURRENT_QUESTION);
 		QuestionDto currentQuestion = new ObjectMapper().convertValue(questonDtoMap, QuestionDto.class);
 		Integer currentQuestionIndex = (Integer)sessionAttributes.get(Attributes.CURRENT_QUESTION_INDEX);
         
 		int answerIndex = isAnswerSlotValid(input);
 
-		if (answerIndex>0 && answerIndex == currentQuestion.getCorrect()+1)
+		
+		if (answerIndex>0 && answerIndex == currentQuestion.getCorrect())
 		{
 //		    currentScore += 1;
 			speechOutputAnalysis = Constants.ANSWER_CORRECT_MESSAGE;
